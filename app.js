@@ -4,6 +4,7 @@ var express               = require("express"),
     bodyParser            = require("body-parser"),
     User                  = require("./models/user"),
     LocalStrategy         = require("passport-local"),
+    methodOverride        = require("method-override"),
     passportLocalMongoose = require("passport-local-mongoose");
 
 var Todo = require("./models/todo");
@@ -18,6 +19,7 @@ console.log("Database in use: " + dbURL);
 //Express setup
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
 //Mongoose setup
@@ -89,6 +91,30 @@ app.post("/", function(req, res){
                 doc.todos = doc.todos.concat([req.body.todoText]);
                 doc.save();
                 console.log("updated");
+                res.redirect("/");
+            }
+        });
+    }
+    else{
+        console.log("not logged in");
+    }
+});
+
+app.delete("/", function(req, res){
+    if(res.locals.currentUser){
+        console.log(res.locals.currentUser._id);
+        var todos = res.locals.currentUser.todos.concat([req.body.todoText]);
+        console.log("NEW: " + todos);
+        User.findById(res.locals.currentUser._id, function (err, doc) {
+            if(err){
+                console.log(err);
+            }
+            else{
+                var index = doc.todos.indexOf(req.body.todoText);
+                doc.todos.splice(index, 1);
+                doc.save();
+                console.log("updated");
+                res.redirect("/");
             }
         });
     }

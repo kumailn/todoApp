@@ -6,6 +6,8 @@ $("ul").on("click", ".xx", function(event){
     console.log("clicked");
     $(this).parent().fadeOut(300, function () {
         $(this).remove();
+        console.log($(this).text());
+        post('/?_method=DELETE', {todoText: $(this).text()});
     });
     event.stopPropagation();
 });
