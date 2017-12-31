@@ -132,6 +132,10 @@ app.get("/g", function(req, res){
     res.redirect("/");
 });
 
+app.get("/s", function(req, res){
+    res.render("s");
+});
+
 function savetodb(name, pass){
     User.register(new User({username : name}), pass, function(err, user){
         if(err){
