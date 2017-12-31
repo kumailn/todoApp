@@ -56,7 +56,7 @@ app.get("/login", function(req, res){
 app.post("/login", function(req, res){
     console.log(req.body.login);
     console.log(req.body.signup);
-    //console.log(req.body.username);
+    req.body.username = req.body.username.toLowerCase();
     //console.log(req.body.password);
     if(req.body.login){
         passport.authenticate("local")(req, res, function(){
@@ -64,7 +64,7 @@ app.post("/login", function(req, res){
         });
         }
     else{
-        User.register(new User({username : req.body.username}), req.body.password, function(err, newuser){
+        User.register(new User({username : req.body.username.toLowerCase()}), req.body.password, function(err, newuser){
             if(err){
                 console.log(err);
                 res.send(err);

@@ -13,10 +13,11 @@ $("ul").on("click", ".xx", function(event){
 });
 
 $("input[type='text']").keypress(function (e) {
-    if(e.which === 13){
+    if(e.which === 13 && $(this).val().length > 0){
         var todoText = $(this).val();
         $("#data").append("<li><span class='xx'><i class='far fa-trash-alt'></i></span>" + " " + todoText + "</li>");
         post('/', {todoText: todoText});
+        $("input[type='text']").val("");
     }
 });
 
