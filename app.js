@@ -165,7 +165,7 @@ app.get("/g", function(req, res){
 });
 
 app.get("/s", function(req, res){
-    res.render("index");
+    res.render("index.html");
 });
 
 app.get("/d", function(req, res){

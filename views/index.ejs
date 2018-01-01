@@ -57,9 +57,6 @@
     </div>
 </nav>
 
-<!--
-<h1> <%= currentUser %>  </h1>
--->
 <!--<div class="" id="particles-js">
 
 </div>-->
@@ -69,16 +66,16 @@
 
 <div class="mycontainer">
     <h1>TODO: <i class="fas fa-plus"></i></h1>
-    <input type="text">
+    <input type="text" placeholder="Add something todo...">
     <ul id="data">
         <%  if(currentUser && currentUser.todos.length > 0){ %>
         <% for(var i = 0; i < currentUser.todos.length; i++){ %>
         <li class="<%if (currentUser.checkedtodos[i]) {%>crossed<%}%>"><span class="xx"><i class="far fa-trash-alt"></i></span><%= currentUser.todos[i] %></li>
         <% }%>
         <% } else { %>
-        <li><span class="xx"><i class="far fa-trash-alt"></i></span> A</li>
-        <li><span class="xx"><i class="far fa-trash-alt"></i></span> B</li>
-        <li><span class="xx"><i class="far fa-trash-alt"></i></span> C</li>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> Study for tomorrows exam </li>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> Do the dishes </li>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> Take out the trash </li>
         <% } %>
     </ul>
 </div>
