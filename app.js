@@ -5,6 +5,7 @@ var express               = require("express"),
     User                  = require("./models/user"),
     LocalStrategy         = require("passport-local"),
     methodOverride        = require("method-override"),
+    favicon               = require('serve-favicon'),
     passportLocalMongoose = require("passport-local-mongoose");
 
 var Todo = require("./models/todo");
@@ -12,7 +13,7 @@ var User = require("./models/user");
 
 var app = express();
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 var dbURL = process.env.DATABASEURL || "mongodb://localhost/todoApp";
 console.log("Database in use: " + dbURL);
 
@@ -21,7 +22,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
-
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.engine('html', require('ejs').renderFile);
 
 //Mongoose setup
