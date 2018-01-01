@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <script type="text/javascript" src="/js/jquery-3.2.1.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <link rel="stylesheet" href="/css/todo.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+</head>
+
+<body id="particles-js">
+<link rel="stylesheet" href="css/style.css">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Todo App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active navbar-dark bg-dark">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item navbar-dark bg-dark">
+                <a class="nav-link" href="#">About</a>
+            </li>
+
+        </ul>
+        <% if(currentUser){%>
+        <li class="nav-item d-inline avbar-dark bg-dark disabled">
+            <a class="nav-link" href="/"><%= currentUser.username %></a>
+        </li>
+        <li class="nav-item d-inline avbar-dark bg-dark disabled">
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </li>
+        <%} else {%>
+        <li class="nav-item d-inline avbar-dark bg-dark">
+            <a class="nav-link" href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a>
+        </li>
+        <li class="nav-item d-inline avbar-dark bg-dark">
+            <a class="nav-link" href="/login"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+        </li>
+        <% } %>
+
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!--
+<h1> <%= currentUser %>  </h1>
+-->
+<!--<div class="" id="particles-js">
+
+</div>-->
+
+<script type="text/javascript" src="js/particles.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<div class="mycontainer">
+    <h1>TODO: <i class="fas fa-plus"></i></h1>
+    <input type="text">
+    <ul id="data">
+        <%  if(currentUser && currentUser.todos.length > 0){ %>
+        <% for(var i = 0; i < currentUser.todos.length; i++){ %>
+        <li class="<%if (currentUser.checkedtodos[i]) {%>crossed<%}%>"><span class="xx"><i class="far fa-trash-alt"></i></span><%= currentUser.todos[i] %></li>
+        <% }%>
+        <% } else { %>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> A</li>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> B</li>
+        <li><span class="xx"><i class="far fa-trash-alt"></i></span> C</li>
+        <% } %>
+    </ul>
+</div>
+
+<% include partials/footer %>
