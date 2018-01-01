@@ -1,4 +1,4 @@
-$("ul").on("click", "li", function (event) {
+$("#data").on("click", "li", function (event) {
    $(this).toggleClass("crossed");
    console.log($(this).text());
     post('/?_method=PUT', {todoText: $(this).text(), todoChecked : $(this).hasClass("crossed")});
