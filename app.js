@@ -161,8 +161,7 @@ app.get("/logout", function(req, res){
     res.redirect("/");});
 
 app.get("/g", function(req, res){
-    req.logout();
-    res.redirect("/");
+    res.send("shouldnt be here");
 });
 
 app.get("/s", function(req, res){
