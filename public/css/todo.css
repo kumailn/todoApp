@@ -81,6 +81,15 @@ input:focus{
     box-shadow: 0 0 3px rgba(0,0,0, 0.1);
 }
 
+.mycontainer {
+    width: 30%;
+    margin: 5% auto;
+    background: #f7f7f7;
+    box-shadow: 0 0 3px rgba(0,0,0, 0.1);
+    overflow: hidden;
+    z-index:1;
+}
+
 
 .crossed {
     color: gray;

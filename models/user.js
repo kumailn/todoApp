@@ -5,7 +5,8 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var userSchema = new mongoose.Schema({
     username : String,
     password : String,
-    todos : [ {type : String} ]
+    todos : [ {type : String} ],
+    checkedtodos : [{type : Boolean}]
 });
 
 userSchema.plugin(passportLocalMongoose);

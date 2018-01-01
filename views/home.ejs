@@ -8,12 +8,13 @@
     <ul id="data">
         <%  if(currentUser && currentUser.todos.length > 0){ %>
         <% for(var i = 0; i < currentUser.todos.length; i++){ %>
-        <li><span class="xx"><i class="far fa-trash-alt"></i></span><%= currentUser.todos[i] %></li>
+        <li class="<%if (currentUser.checkedtodos[i]) {%>crossed<%}%>"><span class="xx"><i class="far fa-trash-alt"></i></span><%= currentUser.todos[i] %></li>
         <% }%>
-        <% } %>
+        <% } else { %>
         <li><span class="xx"><i class="far fa-trash-alt"></i></span> A</li>
         <li><span class="xx"><i class="far fa-trash-alt"></i></span> B</li>
         <li><span class="xx"><i class="far fa-trash-alt"></i></span> C</li>
+        <% } %>
     </ul>
 </div>
 

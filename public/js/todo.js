@@ -1,5 +1,7 @@
 $("ul").on("click", "li", function (event) {
    $(this).toggleClass("crossed");
+   console.log($(this).text());
+    post('/?_method=PUT', {todoText: $(this).text(), todoChecked : $(this).hasClass("crossed")});
 });
 
 $("ul").on("click", ".xx", function(event){

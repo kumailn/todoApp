@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
+app.engine('html', require('ejs').renderFile);
+
 //Mongoose setup
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURL);
@@ -32,6 +34,7 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -89,6 +92,7 @@ app.post("/", function(req, res){
             }
             else{
                 doc.todos = doc.todos.concat([req.body.todoText]);
+                doc.checkedtodos = doc.checkedtodos.concat([false]);
                 doc.save();
                 console.log("updated");
                 res.redirect("/");
@@ -112,6 +116,35 @@ app.delete("/", function(req, res){
             else{
                 var index = doc.todos.indexOf(req.body.todoText);
                 doc.todos.splice(index, 1);
+                doc.checkedtodos.splice(index, 1);
+                doc.save();
+                console.log("updated");
+                res.redirect("/");
+            }
+        });
+    }
+    else{
+        console.log("not logged in");
+    }
+});
+
+app.put("/", function(req, res){
+    console.log(req.body.todoText);
+    console.log(req.body.todoChecked);
+    if(res.locals.currentUser){
+        console.log(res.locals.currentUser._id);
+        var todos = res.locals.currentUser.todos.concat([req.body.todoText]);
+        console.log("NEW: " + todos);
+        User.findById(res.locals.currentUser._id, function (err, doc) {
+            if(err){
+                console.log(err);
+            }
+            else{
+                var index = doc.todos.indexOf(req.body.todoText);
+                //doc.todos.splice(index, 1);
+                doc.checkedtodos[index] = req.body.todoChecked;
+                doc.checkedtodos = doc.checkedtodos;
+                console.log("New checked val: " +  doc.checkedtodos);
                 doc.save();
                 console.log("updated");
                 res.redirect("/");
@@ -124,8 +157,8 @@ app.delete("/", function(req, res){
 });
 
 app.get("/logout", function(req, res){
-    res.render("/login")
-});
+    req.logout();
+    res.redirect("/");});
 
 app.get("/g", function(req, res){
     req.logout();
@@ -133,7 +166,11 @@ app.get("/g", function(req, res){
 });
 
 app.get("/s", function(req, res){
-    res.render("s");
+    res.render("index");
+});
+
+app.get("/d", function(req, res){
+    res.render("particlesTest");
 });
 
 function savetodb(name, pass){

@@ -35,10 +35,10 @@
         </ul>
         <% if(currentUser){%>
             <li class="nav-item d-inline avbar-dark bg-dark disabled">
-                <a class="nav-link" href="/register"><%= currentUser.username %></a>
+                <a class="nav-link" href="/"><%= currentUser.username %></a>
             </li>
         <li class="nav-item d-inline avbar-dark bg-dark disabled">
-            <a class="nav-link" href="/register"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </li>
         <%} else {%>
         <li class="nav-item d-inline avbar-dark bg-dark">
